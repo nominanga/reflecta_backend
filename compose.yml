@@ -1,0 +1,42 @@
+services:
+  app:
+    build: .
+    container_name: backend
+    networks:
+      - reflecta
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - gradle-cache:/home/gradle/.gradle
+
+  postgres:
+    image: postgres:17.4
+    container_name: db
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - reflecta
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5431:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+
+networks:
+  reflecta:
+
+volumes:
+  postgres-data:
+  gradle-cache:
