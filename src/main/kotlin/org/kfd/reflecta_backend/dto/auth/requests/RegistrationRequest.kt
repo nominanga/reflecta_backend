@@ -19,5 +19,5 @@ data class RegistrationRequest(
         regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+\$",
         message = "Password must contain at least one lowercase, one uppercase and one digit"
     )
-    val password: String
+    var password: String
 )

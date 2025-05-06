@@ -1,14 +1,11 @@
 package org.kfd.reflecta_backend.services
 
 import jakarta.persistence.EntityNotFoundException
-import org.kfd.reflecta_backend.database.entities.Note
 import org.kfd.reflecta_backend.database.entities.User
 import org.kfd.reflecta_backend.database.entities.UserSettings
-import org.kfd.reflecta_backend.database.repositories.NoteRepository
-import org.kfd.reflecta_backend.dto.UserDto
 import org.kfd.reflecta_backend.database.repositories.UserRepository
 import org.kfd.reflecta_backend.dto.UserSettingsDto
-import org.kfd.reflecta_backend.exceptions.ConflictException
+import org.kfd.reflecta_backend.dto.auth.requests.RegistrationRequest
 import org.springframework.stereotype.Service
 
 @Service
@@ -16,16 +13,12 @@ class UserService(
     private val userRepository: UserRepository,
 ) {
 
-    fun registerUser(userDto: UserDto): User {
-
-        if (userRepository.existsUserByEmail(userDto.email)) {
-            throw ConflictException("User with this email already exists")
-        }
+    fun createUser(userCredentials: RegistrationRequest): User {
 
         val user = User(
-            username = userDto.username,
-            email = userDto.email,
-            password = userDto.password
+            username = userCredentials.username,
+            email = userCredentials.email,
+            password = userCredentials.password
         )
 
         user.userSettings = UserSettings(
@@ -54,7 +47,12 @@ class UserService(
         return userRepository.save(user)
     }
 
-    fun existsUserByEmail(email: String): Boolean = userRepository.existsUserByEmail(email)
+    fun existsUserByEmail(email: String): Boolean = userRepository.existsByEmail(email)
+
+    fun getUserByEmail(email: String): User {
+        val user = userRepository.findByEmail(email) ?: throw EntityNotFoundException("User with email: $email not found")
+        return user
+    }
 
     fun updateAvatar(id: Long, avatar: String): User {
         val user = getUser(id)
