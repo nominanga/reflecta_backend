@@ -1,8 +1,9 @@
-package kfd.reflecta.backend.database.entities
+package org.kfd.reflecta_backend.database.entities
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
+import org.kfd.reflecta_backend.database.entities.AbstractEntity
 
 
 @Entity

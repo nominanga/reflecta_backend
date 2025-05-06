@@ -1,4 +1,4 @@
-package kfd.reflecta.backend.exceptions
+package org.kfd.reflecta_backend.exceptions
 
 class ConflictException (
     message: String

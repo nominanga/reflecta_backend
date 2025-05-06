@@ -1,21 +1,19 @@
-package kfd.reflecta.backend.services
+package org.kfd.reflecta_backend.services
 
 import jakarta.persistence.EntityNotFoundException
-import kfd.reflecta.backend.database.entities.Note
-import kfd.reflecta.backend.database.entities.User
-import kfd.reflecta.backend.database.entities.UserSettings
-import kfd.reflecta.backend.database.repositories.NoteRepository
-import kfd.reflecta.backend.dto.UserDto
-import kfd.reflecta.backend.database.repositories.UserRepository
-import kfd.reflecta.backend.dto.UserSettingsDto
-import kfd.reflecta.backend.exceptions.BadRequestException
-import kfd.reflecta.backend.exceptions.ConflictException
+import org.kfd.reflecta_backend.database.entities.Note
+import org.kfd.reflecta_backend.database.entities.User
+import org.kfd.reflecta_backend.database.entities.UserSettings
+import org.kfd.reflecta_backend.database.repositories.NoteRepository
+import org.kfd.reflecta_backend.dto.UserDto
+import org.kfd.reflecta_backend.database.repositories.UserRepository
+import org.kfd.reflecta_backend.dto.UserSettingsDto
+import org.kfd.reflecta_backend.exceptions.ConflictException
 import org.springframework.stereotype.Service
 
 @Service
 class UserService(
     private val userRepository: UserRepository,
-    private val noteRepository: NoteRepository
 ) {
 
     fun registerUser(userDto: UserDto): User {
@@ -43,8 +41,6 @@ class UserService(
         }
         return user
     }
-
-    fun getAllUsers(): List<User> = userRepository.findAll()
 
     fun deleteUser(id: Long) {
         val user = getUser(id)
@@ -81,10 +77,6 @@ class UserService(
     fun getUserSettings(id: Long): UserSettings? {
         val user = getUser(id)
         return user.userSettings
-    }
-
-    fun getUserNotes(userId: Long, page: Int, sort: Int) : Page<Note> {
-
     }
 
 }

@@ -1,4 +1,4 @@
-package kfd.reflecta.backend.database.entities
+package org.kfd.reflecta_backend.database.entities
 
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp

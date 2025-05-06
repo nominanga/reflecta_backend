@@ -1,4 +1,4 @@
-package kfd.reflecta.backend.dto
+package org.kfd.reflecta_backend.dto
 
 data class UserSettingsDto(
     val sendToEmail: Boolean? = null,

@@ -1,11 +1,11 @@
-package kfd.reflecta.backend.database.entities
+package org.kfd.reflecta_backend.database.entities
 
 import jakarta.persistence.*
 
 @Entity
 @Table(name = "`users`")
 class User(
-    @Column(unique=true, nullable = false)
+    @Column(nullable = false)
     val username: String,
 
     @Column(unique=true, nullable = false)

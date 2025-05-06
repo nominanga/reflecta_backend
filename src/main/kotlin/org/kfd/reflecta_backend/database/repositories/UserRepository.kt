@@ -1,6 +1,6 @@
-package kfd.reflecta.backend.database.repositories
+package org.kfd.reflecta_backend.database.repositories
 
-import kfd.reflecta.backend.database.entities.User
+import org.kfd.reflecta_backend.database.entities.User
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository : JpaRepository<User, Long> {

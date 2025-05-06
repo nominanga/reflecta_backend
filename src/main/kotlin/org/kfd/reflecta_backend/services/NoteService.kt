@@ -1,10 +1,8 @@
-package kfd.reflecta.backend.services
+package org.kfd.reflecta_backend.services
 
-import kfd.reflecta.backend.database.entities.Note
-import kfd.reflecta.backend.database.entities.User
-import kfd.reflecta.backend.database.repositories.NoteRepository
-import kfd.reflecta.backend.database.repositories.UserRepository
-import kfd.reflecta.backend.dto.NoteDto
+import org.kfd.reflecta_backend.database.entities.Note
+import org.kfd.reflecta_backend.database.repositories.NoteRepository
+import org.kfd.reflecta_backend.dto.NoteDto
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable

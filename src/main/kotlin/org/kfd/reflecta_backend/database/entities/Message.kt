@@ -1,7 +1,7 @@
-package kfd.reflecta.backend.database.entities
+package org.kfd.reflecta_backend.database.entities
 
 import jakarta.persistence.*
-import kfd.reflecta.backend.enums.MessageSender
+import org.kfd.reflecta_backend.enums.MessageSender
 
 @Entity
 @Table(name = "messages")

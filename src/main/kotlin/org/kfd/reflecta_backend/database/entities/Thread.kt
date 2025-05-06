@@ -1,6 +1,9 @@
-package kfd.reflecta.backend.database.entities
+package org.kfd.reflecta_backend.database.entities
 
 import jakarta.persistence.*
+import org.kfd.reflecta_backend.database.entities.AbstractEntity
+import org.kfd.reflecta_backend.database.entities.Message
+import org.kfd.reflecta_backend.database.entities.Note
 
 @Entity
 @Table(name = "threads")
