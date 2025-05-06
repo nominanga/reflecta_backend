@@ -6,6 +6,7 @@ import org.kfd.reflecta_backend.dto.auth.requests.RegistrationRequest
 import org.kfd.reflecta_backend.dto.auth.responses.AuthResponse
 import org.kfd.reflecta_backend.exceptions.ConflictException
 import org.kfd.reflecta_backend.exceptions.InvalidCredentialsException
+import org.kfd.reflecta_backend.exceptions.UnauthorizedException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -13,8 +14,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class AuthService(
-    private val jwtService: JwtService,
+    private val redisTokenService: RedisTokenService,
     private val userService: UserService,
+    private val jwtService: JwtService,
 ) {
 
     private val encoder: PasswordEncoder = BCryptPasswordEncoder(12)
@@ -29,24 +31,23 @@ class AuthService(
         val user = userService.createUser(request)
         val userId = user.id
 
-        return AuthResponse(
-            jwtService.generateToken(userId, true),
-            jwtService.generateToken(userId, false)
-        )
+        return redisTokenService.generateTokens(userId)
     }
 
     fun login(request: LoginRequest): AuthResponse {
         val user = userService.getUserByEmail(request.email)
 
         if (encoder.matches(request.password, user.password)) {
-            return AuthResponse(
-                jwtService.generateToken(user.id, true),
-                jwtService.generateToken(user.id, false)
-            )
+            return redisTokenService.generateTokens(user.id)
         } else {
             throw InvalidCredentialsException("Wrong password")
         }
     }
 
+    fun refresh(refreshToken: String): AuthResponse = redisTokenService.refreshTokens(refreshToken)
 
+    fun logout(accessToken: String) {
+        val userId = jwtService.extractUserId(accessToken, true) ?: throw UnauthorizedException("User is unauthorized")
+        redisTokenService.removeToken(userId)
+    }
 }

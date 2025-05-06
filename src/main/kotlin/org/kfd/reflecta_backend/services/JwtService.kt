@@ -63,4 +63,6 @@ class JwtService (private val jwtProperties: JwtProperties){
             null
         }
     }
+
+    fun refreshTokenExpirationTime(): Long = jwtProperties.refresh.expirationTime
 }

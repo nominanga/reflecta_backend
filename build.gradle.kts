@@ -24,7 +24,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.security:spring-security-crypto:5.7.3")
+    implementation("org.springframework.security:spring-security-crypto:6.4.4")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
