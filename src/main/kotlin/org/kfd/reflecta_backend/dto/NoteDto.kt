@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotNull
 
 data class NoteDto(
     val title: String? = null,
-    @field:NotBlank(message = "Note content should not be empty")
-    val body: String,
-    @field:NotNull
-    val userId: Long
+    @field:NotBlank(message = "Note content cannot be empty")
+    val body: String
 )
