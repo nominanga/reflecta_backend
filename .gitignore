@@ -1,3 +1,6 @@
+uploads/avatars/*
+!uploads/avatars/default.png
+
 .env
 .gradle
 build/

@@ -6,14 +6,14 @@ import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
 
 data class RegistrationRequest(
-    @field:NotBlank
+    @field:NotBlank(message = "Username is required")
     val username: String,
 
     @field:Email(message = "Invalid email format")
-    @field:NotBlank(message = "Email cannot be blank")
+    @field:NotBlank(message = "Email is required")
     val email: String,
 
-    @field:NotBlank
+    @field:NotBlank(message = "Password is not set")
     @field:Size(min = 8, max = 20, message = "Password must be from 8 to 20 characters long")
     @field:Pattern(
         regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+\$",

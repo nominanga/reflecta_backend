@@ -1,6 +1,5 @@
 package org.kfd.reflecta_backend.services
 
-import org.kfd.reflecta_backend.dto.UserDto
 import org.kfd.reflecta_backend.dto.auth.requests.LoginRequest
 import org.kfd.reflecta_backend.dto.auth.requests.RegistrationRequest
 import org.kfd.reflecta_backend.dto.auth.responses.AuthResponse
@@ -8,7 +7,6 @@ import org.kfd.reflecta_backend.exceptions.ConflictException
 import org.kfd.reflecta_backend.exceptions.InvalidCredentialsException
 import org.kfd.reflecta_backend.exceptions.UnauthorizedException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -48,6 +46,7 @@ class AuthService(
 
     fun logout(accessToken: String) {
         val userId = jwtService.extractUserId(accessToken, true) ?: throw UnauthorizedException("User is unauthorized")
-        redisTokenService.removeToken(userId)
+        redisTokenService.removeTokenById(userId)
     }
+
 }

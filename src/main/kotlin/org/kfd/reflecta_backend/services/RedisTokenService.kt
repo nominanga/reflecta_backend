@@ -35,7 +35,7 @@ class RedisTokenService (
         )
     }
 
-    fun removeToken(userId: Long) {
+    fun removeTokenById(userId: Long) {
         redisTemplate.delete("user:$userId")
     }
 
@@ -47,7 +47,7 @@ class RedisTokenService (
 
         val data = objectMapper.readValue(stored, Map::class.java)
         if (refreshToken == data["token"]) {
-            removeToken(userId)
+            removeTokenById(userId)
             return generateTokens(userId)
         } else {
             throw InvalidCredentialsException("Invalid token")

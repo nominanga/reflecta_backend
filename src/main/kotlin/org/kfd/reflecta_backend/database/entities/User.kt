@@ -6,7 +6,7 @@ import jakarta.persistence.*
 @Table(name = "`users`")
 class User(
     @Column(nullable = false)
-    val username: String,
+    var username: String,
 
     @Column(unique=true, nullable = false)
     val email: String,
@@ -17,7 +17,7 @@ class User(
 ) : AbstractEntity() {
 
     @Column(unique=true)
-    var avatar: String? = null
+    var avatar: String = "/media/avatars/default.png"
 
     @OneToOne(mappedBy = "user", cascade = [(CascadeType.ALL)], orphanRemoval = true)
     var userSettings: UserSettings? = null

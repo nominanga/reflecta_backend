@@ -11,8 +11,6 @@ import org.kfd.reflecta_backend.database.entities.User
 @Entity
 @Table(name = "user_settings")
 class UserSettings(
-    @Column(name="send_to_email")
-    var sendToEmail: Boolean = false,
 
     @Column(name="notification_frequency")
     var notificationFrequency: Int = 10,
