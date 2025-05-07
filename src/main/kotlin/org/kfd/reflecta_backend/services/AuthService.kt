@@ -44,8 +44,8 @@ class AuthService(
 
     fun refresh(refreshToken: String): AuthResponse = redisTokenService.refreshTokens(refreshToken)
 
-    fun logout(accessToken: String) {
-        val userId = jwtService.extractUserId(accessToken, true) ?: throw UnauthorizedException("User is unauthorized")
+    fun logout(userId: Long) {
+        //val userId = jwtService.extractUserId(accessToken, true) ?: throw UnauthorizedException("User is unauthorized")
         redisTokenService.removeTokenById(userId)
     }
 
