@@ -20,8 +20,8 @@ class Note(
     @Column(name = "is_favorite")
     var isFavorite: Boolean = false
 
-    @OneToOne(mappedBy = "note")
-    val thread: Thread? = null
+    @OneToOne(mappedBy = "note", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var noteThread: NoteThread? = null
 
     @ManyToMany
     @JoinTable(

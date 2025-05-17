@@ -6,5 +6,5 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface NoteRepository : JpaRepository<Note, Long> {
-    fun findNotesByUserId(userId: Long, pageable: Pageable): Page<Note>
+    fun findNotesByUserId(userId: Long): List<Note>
 }

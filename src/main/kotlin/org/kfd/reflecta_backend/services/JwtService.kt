@@ -3,8 +3,7 @@ package org.kfd.reflecta_backend.services
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
-import org.kfd.reflecta_backend.configs.JwtProperties
-import org.kfd.reflecta_backend.database.entities.User
+import org.kfd.reflecta_backend.configs.properties.JwtProperties
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -53,15 +52,6 @@ class JwtService (private val jwtProperties: JwtProperties){
     fun extractUserId(token: String, isAccess: Boolean): Long? {
         val claims = parseToken(token, isAccess)
         return claims?.get("id")?.toString()?.toLong()
-    }
-
-    fun refreshAccessToken(refreshToken: String): String? {
-        val userId = extractUserId(refreshToken, isAccess = false)
-        return if (userId != null) {
-            generateAccessToken(userId)
-        } else {
-            null
-        }
     }
 
     fun refreshTokenExpirationTime(): Long = jwtProperties.refresh.expirationTime

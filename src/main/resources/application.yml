@@ -35,3 +35,6 @@ jwt:
   refresh:
     secret: ${REFRESH_SECRET}
     expiration-time: ${REFRESH_EXPIRATION_TIME}
+
+deepseek:
+  api-key: ${DEEPSEEK_API_KEY}

@@ -15,6 +15,6 @@ class Message(
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "thread_id")
-    val thread: Thread,
+    val noteThread: NoteThread,
 ) : AbstractEntity() {
 }
